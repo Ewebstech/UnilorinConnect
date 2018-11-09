@@ -1,0 +1,121 @@
+<style>
+.moda { background:rgba(0,0,0,0.5); display:none; width:100%; height:100%; z-index:1111; position:fixed; top:0; left:0;
+ cursor:default; }
+
+#modapage { background:#fff; padding:3px 5px 5px 10px; display:none; border-radius:5px;
+			 box-shadow:0px 0px 10px 3px rgba(0,0,0,0.5); -moz-box-shadow:0px 0px 10px 3px rgba(0,0,0,0.5);
+			 width:380px;position:absolute; z-index:1111; margin-top: -90px;
+}
+.bg-red{ background: red;}
+.c {
+	display:block;
+	text-align:right;
+	line-height:0.8;
+	margin:0;
+	float:right;
+}
+.ani { -webkit-animation:bring 1s; -o-animation:bring 1s; animation:bring 1s;
+				position:absolute; top:20%; left:25%; }
+.outta { -webkit-animation:outta 5s; -o-animation:outta 5s; position:absolute; top:-1000px; }
+.cl { font-size:30px; color:#f20; }
+.cl:hover { cursor:pointer; }
+
+@-webkit-keyframes bring { from	{ top:-100%; }
+}
+@-o-keyframes bring { from { top:-100%; }
+}
+@keyframes bring { from { top:-100%; }
+}
+
+@-webkit-keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }	
+}
+@-o-keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }
+}
+@keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }
+}
+.login-box-body,
+.register-box-body {
+  background: #fff;
+  padding: 20px;
+  color: #444;
+  border-top: 0;
+  color: #666;
+}
+.login-box-body .form-control-feedback,
+.register-box-body .form-control-feedback {
+  color: #777;
+}
+.login-box-msg,
+.register-box-msg {
+  margin: 0;
+  text-align: center;
+  padding: 0 20px 20px 20px;
+}
+</style>
+<div id='moda' class='moda'></div>
+<div id="modapage">
+	<div class="c"><a href='javascript:closemoda()' class='cl'>&#215;</a></div>
+ <div class="login-box-body">
+				<p class="login-box-msg"><button class="btn btn-danger btn-flat">Sign-Up Quickly on Unilorin Connect</button></p>
+				<?php error_reporting(0); ?>
+				<form action="process.php" method="post">
+				<?php if(isset($_REQUEST["signup"]) and $_REQUEST["signup"] == "emp"){ echo "<div class='badge bg-red'>You cant sign-up with empty fields</div>"; } ?>
+				  <div class="form-group has-feedback">
+					<label style="font-size: 11px;">First Name</label>
+					<input type="text" class="form-control" placeholder="First Name..." name="firstname" />
+				  </div>
+				  <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Last Name</label>
+					<input type="text" class="form-control" placeholder="Last Name..." name="lastname" />
+				  </div>
+				   <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Email Address</label>
+					<input type="email" class="form-control" placeholder="Email Address..." name="email" />
+				  </div>
+				  <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Username</label>
+					<input type="text" class="form-control" placeholder="Choose your Username" name="username" />
+		<?php if(isset($_REQUEST["signup"]) and $_REQUEST["signup"] == "equsername"){ echo "<div class='badge bg-red'>The Username - <b>$_REQUEST[value]</b> is already taken.</div>"; } ?>		  
+				  </div>
+				   <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Phone Number</label>
+					<input type="number" class="form-control" placeholder="Phone Number..." name="phonenumber" />
+				  </div>
+				  
+				   <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Choose Password</label>
+					<input type="password" class="form-control" placeholder="Six (6) Characters Minimum ..." name="password" />
+					<?php if(isset($_REQUEST["signup"]) and $_REQUEST["signup"] == "char"){ echo "<div class='badge bg-red'>Your password must be above 5 characters</div>"; } ?>
+				  </div>
+				  <div class="form-group has-feedback">
+					<label style="font-size: 11px;">Confirm Password</label>
+					<input type="password" class="form-control" placeholder="Confirm Password" name="cpassword" />
+					<?php if(isset($_REQUEST["signup"]) and $_REQUEST["signup"] == "matcherr"){ echo "<div class='badge bg-red'>Passwords don't match</div>"; } ?>
+				  </div>
+				  
+				
+    </div>
+				<div class="row contact_btn">
+					<div style="margin-left: 120px; margin-bottom: 20px;"><input name="signup" type="submit"  class="btn btn-danger btn2g" value="Sign-Up" /></div><!-- /.col -->
+				  </div><!-- /. row -->
+				</form>
+			  </div><!-- /.login-box-body -->
+			 </div>
+<script>
+window.onload = function(){ b(); }
+function b()
+{
+	document.getElementById('modapage').className = 'ani';
+	document.getElementById('modapage').style.display = 'block'; document.getElementById('moda').style.display = 'block';
+}
+function closemoda()
+{	
+	document.getElementById('modapage').className = 'outta';
+	setTimeout('removecon()',2000);
+	setTimeout("location = './'");
+}
+function removecon()
+{
+	document.getElementById('modapage').style.display = 'none'; document.getElementById('moda').style.display = 'none';
+}
+</script>

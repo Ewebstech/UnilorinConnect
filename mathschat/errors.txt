@@ -1,0 +1,8 @@
+
+2015-08-09 09:42:47 Cannot connect to database.
+2015-08-09 09:47:05 Table 'freechat.blab7_settings' doesn't exist
+2015-08-09 09:47:53 Table 'freechat.blab7_settings' doesn't exist
+2015-08-09 09:48:57 Table 'freechat.blab7_settings' doesn't exist
+2015-08-09 09:48:59 Table 'freechat.blab7_settings' doesn't exist
+2015-08-09 09:49:35 Table 'freechat._settings' doesn't exist
+2015-08-09 09:50:54 Table 'freechat.blab7_settings' doesn't exist

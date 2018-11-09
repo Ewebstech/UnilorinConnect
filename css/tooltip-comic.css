@@ -1,0 +1,137 @@
+@import url(http://fonts.googleapis.com/css?family=Bangers);
+
+.ttooltip {
+	position: relative;
+	
+	margin: 0 auto;
+	font-family: 'Bangers', cursive;
+}
+
+.ttooltip-content {
+	position: absolute;
+	line-height: 1.2;
+	pointer-events: none;
+	text-align: center;
+	z-index: 100;
+	opacity: 0;
+	padding: 30px;
+	padding-right: 50px;
+	font-size: 1.05em;
+	bottom: 100%;
+	z-index: 1999!important;
+	
+}
+
+.ttooltip-effect-1 .ttooltip-content {
+	width: 180px;
+	right: 83%;
+	margin: 0 0 20px 0;
+	
+	-webkit-transform: scale3d(0,0,1);
+	transform: scale3d(0,0,1);
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+	z-index: 1999!important;
+}
+
+.ttooltip-effect-2 .ttooltip-content {
+	width: 220px;
+	left: 30%;
+	margin: 0 0 40px -75px;
+	-webkit-transform: translate3d(0,-10px,0);
+	transform: translate3d(0,-10px,0);
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+.ttooltip-effect-1:hover .ttooltip-content {
+	opacity: 1;
+	-webkit-transform: scale3d(1,1,1);
+	transform: scale3d(1,1,1);
+	-webkit-transition-delay: 0.15s;
+	transition-delay: 0.15s;
+	z-index: 1999 !important;
+}
+
+.ttooltip-effect-2:hover .ttooltip-content {
+	opacity: 1;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+/* Shape */
+.ttooltip-shape {
+	position: absolute;
+	width: 220px;
+	height: 165px;
+	pointer-events: none;
+}
+
+.ttooltip-effect-1 .ttooltip-shape {
+	top: 0;
+	right: 65%;
+	-webkit-transform: translate3d(0,-90%,0);
+	transform: translate3d(0,-90%,0);
+}
+
+.ttooltip-effect-2 .ttooltip-shape {
+	bottom: 100%;
+	left: 50%;
+	margin: 0 0 0 -75px;
+}
+
+.ttooltip:hover .ttooltip-shape {
+	pointer-events: auto;
+}
+
+.ttooltip-shape svg {
+	stroke: #e74c3c;
+	stroke-width: 2;
+}
+
+.ttooltip-effect-1 .ttooltip-shape svg path {
+	fill: #fff;
+	opacity: 0;
+	-webkit-transform: scale3d(0,0,1);
+	transform: scale3d(0,0,1);
+	-webkit-transform-origin: 50% 50%;
+	transform-origin: -180% -100%;
+	-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+	transition: opacity 0.3s, transform 0.3s;
+}
+
+.ttooltip-effect-1:hover .ttooltip-shape svg path {
+	opacity: 1;
+	-webkit-transform: scale3d(1,1,1);
+	transform: scale3d(1,1,1);
+}
+
+.ttooltip-effect-1:hover .ttooltip-shape svg path#path2 {
+	-webkit-transition-delay: 0.07s;
+	transition-delay: 0.07s;
+}
+
+.ttooltip-effect-1:hover .ttooltip-shape svg path#path3 {
+	-webkit-transition-delay: 0.14s;
+	transition-delay: 0.14s;
+}
+
+.ttooltip-effect-1:hover .ttooltip-shape svg path#path4 {
+	-webkit-transition-delay: 0.21s;
+	transition-delay: 0.21s;
+}
+
+.ttooltip-effect-2 .ttooltip-shape svg polygon {
+	fill: transparent;
+	stroke-dasharray: 580;
+	stroke-dashoffset: 580;
+}
+
+.ttooltip-effect-2:hover .ttooltip-shape svg polygon {
+	stroke-dashoffset: 0;
+	fill: #fff;
+	-webkit-transition: stroke-dashoffset 0.8s, fill 0.8s;
+	transition: stroke-dashoffset 0.8s, fill 0.8s;
+}

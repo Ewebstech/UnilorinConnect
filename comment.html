@@ -1,0 +1,191 @@
+<style>
+.moda { background:rgba(0,0,0,0.5); display:none; width:100%; height:100%; z-index:1111; position:fixed; top:0; left:0;
+ cursor:default; }
+
+#modapage { background:#fff; padding:3px 5px 5px 10px; display:none; border-radius:5px;
+			 box-shadow:0px 0px 10px 3px rgba(0,0,0,0.5); -moz-box-shadow:0px 0px 10px 3px rgba(0,0,0,0.5);
+			 width:380px;position: fixed; z-index:1111; margin-top: -20px; max-height: 500px;
+}
+
+.c {
+	display:block;
+	text-align:right;
+	line-height:0.8;
+	margin:0;
+	float:right;
+}
+.ani { -webkit-animation:bring 1s; -o-animation:bring 1s; animation:bring 1s;
+				position:absolute; top:20%; left:25%; }
+.outta { -webkit-animation:outta 5s; -o-animation:outta 5s; position:absolute; top:-1000px; }
+.cl { font-size:30px; color:#f20; }
+.cl:hover { cursor:pointer; }
+
+@-webkit-keyframes bring { from	{ top:-100%; }
+}
+@-o-keyframes bring { from { top:-100%; }
+}
+@keyframes bring { from { top:-100%; }
+}
+
+@-webkit-keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }	
+}
+@-o-keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }
+}
+@keyframes outta { from { top:10%; left:25%; opacity:1; } to { top:-100%; left:25%; opacity:0.9; }
+}
+</style>
+<div id='moda' class='moda'></div>
+<?php session_start(); ?>
+<div id="modapage">
+	<div class="c"><a href='javascript:closemoda()' class='cl'>&#215;</a></div>
+ <div class="login-box-body">
+				
+			
+				
+				
+				  <?php 	
+										if(isset($_REQUEST["coment"])){
+										$comid = $_REQUEST['coment'];
+										
+										}
+									  //$postquery = mysql_query("SELECT * from `statusposts` WHERE `posterid`='$userid' or `posterid`='$friendid' order by time desc");
+									  $postquery = mysql_query("SELECT * from `statusposts` where id='$comid' order by time desc");
+									  
+									  
+									  while($post = mysql_fetch_assoc($postquery)) { 
+									  ?>
+									  <div class="row">
+									  <div class="panel">
+									 
+									  <div class="panel-heading" >
+									
+									  <div class="col-sm-3" style="margin-left: -20px;">
+									  <?php
+											
+													if(is_dir("profilepictures/".$post["posterid"].""))
+													{
+														$dh = scandir("profilepictures/".$post["posterid"]."");
+																																					
+														echo "<img src='profilepictures/$post[posterid]/$dh[2]' style='border-radius: 7px; width: 50px; height: 41px;' class='img-responsive' />";
+														
+													}
+													else{
+														echo "<img src='images/find_user.png'  class='img-responsive img-user' style='border-radius: 7px; width: 50px; height: 41px;' />";
+													}
+													
+													
+										?>
+									
+									  
+									  </div>
+									  <?php $rowquery = mysql_query("select * from comments where postid='$post[postid]'"); 
+											$commentrow = mysql_num_rows($rowquery);
+									  ?>
+									  <div class="pull-left displayname"><a href="<?php echo"mp.php?profile=$post[posterid]&$post[postername]"; ?>"><?php echo"$post[postername]"; ?></a><span  style="font-size: 9px; color: #666666; text-align: right; width: 110px;  display: inline-block;"><i class="fa fa-comments"></i> <?php echo (!empty($commentrow)) ? "$commentrow Comments" : "0 Comments" ; ?> </span><br />
+									  <span style="font-size: 9px; color: #666666; text-align: left; padding-right: 30px;"><i class="fa fa-globe"></i> <?php echo date('F d Y, \a\t\ h:i a', $post["time"]); ?></span></div>
+									   
+									  </div>
+									 
+									  <br clear="all" />
+								   <hr />
+										<div class="panel-body">
+											<?php $text = substr($post["post"],0,80);echo"$text..."; ?>
+											
+									<div class="col-sm-12" style="margin-top: 20px;">
+									
+								<?php 
+								
+												
+								
+								if($post) { echo "<img src='$post[imgpath]' class='img-responsive' style='max-height: 100px; margin-right: auto; margin-left: auto;'/>"; } ?>
+									  
+									  </div>
+										</div>
+										<div id="successdiv">
+								<hr />
+							
+								
+								
+								 <div class="panel commentspanel">
+								 
+								 
+								 <script type="text/javascript">
+										$(document).ready(function (e) {
+									$("#contactForm").on('submit',(function(e) {
+										e.preventDefault();
+										$.ajax({
+											url: "process.php?commenter=" + document.getElementById("commenter").value + 
+											"&postid=" + document.getElementById("postid").value + "&comment=" + document.getElementById("comment").value,
+											type: "POST",
+											data:  new FormData(this),
+											contentType: false,
+											cache: false,
+											processData:false,
+											success: function(data)
+											{
+											$("#successdiv").html(data);
+											},
+											error: function() 
+											{
+											} 	        
+									   });
+									}));
+									
+								});
+								</script>
+								<form  id="contactForm" method="post">
+								<div class="form-group" >
+								<div class="input-group" style="margin-bottom: 5px;">
+								<div class="input-group-addon" style="width: 80px; max-width: 90px; max-height: 90px; !important;">
+								 <?php
+											
+													if(is_dir("profilepictures/".$userid.""))
+													{
+														$dh = scandir("profilepictures/".$userid."");
+																																					
+														echo "<img src='profilepictures/$userid/$dh[2]' style='display: inline-block; border-radius: 7px; width: 50px; height: 41px;' class='img-responsive' />";
+														
+													}
+													else{
+														echo "<img src='images/find_user.png'  class='img-responsive img-user' style='border-radius: 7px; width: 50px; height: 41px;' />";
+													}
+													
+													
+								?>
+								</div>
+                                    <textarea class="form-control" cols='30' placeholder="Comment on this Post" id="comment" required data-validation-required-message="Please enter a comment."></textarea>
+                                </div>
+								<input type="hidden" id="postid" value="<?php echo"$post[postid]"; ?>" />
+								<input type="hidden" id="commenter" value="<?php echo"$userid"; ?>" />
+								 <input type="submit" class="btn btn-primary btn-xs pull-right" value="Comment">
+								</div>
+								
+								</form>
+								 </div>
+								 </div>
+								 </div><!-- /success div -->
+								 	</div>
+								
+									  <?php } ?>
+			  </div><!-- /.login-box-body -->
+			 </div>
+<script>
+window.onload = function(){ b(); }
+function b()
+{
+	document.getElementById('modapage').className = 'ani';
+	document.getElementById('modapage').style.display = 'block'; document.getElementById('moda').style.display = 'block';
+}
+function closemoda()
+{	
+	document.getElementById('modapage').className = 'outta';
+	setTimeout('removecon()',2000);
+	setTimeout("location = '?&done'",2000);
+	
+}
+function removecon()
+{
+	document.getElementById('modapage').style.display = 'none'; document.getElementById('moda').style.display = 'none';
+	//location = '" + document.referrer + "';
+}
+</script>
